@@ -1,10 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useUser } from "@auth0/nextjs-auth0/client";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
@@ -12,6 +9,7 @@ export default function Home() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   console.log(user ? true : false);
+  console.log(user);
 
   if (user) {
     return (
@@ -26,7 +24,14 @@ export default function Home() {
           <div className={styles.description}>
             <p>Welcome {user.name}!</p>
             <p>
-              <a href="/api/auth/logout">Logout</a>
+              <a className={styles.main_link} href="/profile">
+                Profile
+              </a>
+            </p>
+            <p>
+              <a className={styles.main_link} href="/api/auth/logout">
+                Logout
+              </a>
             </p>
           </div>
         </main>
@@ -37,7 +42,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          <a href="/api/auth/login">Login</a>
+          <a href="/api/auth/login">Login/Register</a>
         </p>
       </div>
     </main>
